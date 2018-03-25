@@ -37,8 +37,8 @@ class HBNBCommand(cmd.Cmd):
 
     # new create
     def create_parser(self, x):
-        if x[0] == '"' and x[-1] == '"':
-            return x.replace('_', ' ')
+        # if x[0] == '"' and x[-1] == '"':
+            # return x.replace('_', ' ')
         try:
             # print(1)
             a = int(x)
@@ -68,16 +68,18 @@ class HBNBCommand(cmd.Cmd):
             return
         try:
             args = shlex.split(args)
+            instance = args[0]
             # print(args)
-            grandArr = [arg.split('=') for arg in args[1:-1]]
+            args = [arg for arg in args if '=' in arg]
 
-            new_instance = eval(args[0])()
+            new_instance = eval(instance)()
 
-            for minArr in grandArr:
+            for minArr in [arg.split('=') for arg in args[1:-1]]:
                 setattr(new_instance, minArr[0], self.create_parser(minArr[1]))
 
-            new_instance.save()
-            print(new_instance.id)
+            # new_instance.save()
+            print(new_instance)
+            # print(new_instance.id)
 
         except:
             print("** class doesn't exist **")
