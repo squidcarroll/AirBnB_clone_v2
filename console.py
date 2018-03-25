@@ -37,8 +37,8 @@ class HBNBCommand(cmd.Cmd):
 
     # new create
     def create_parser(self, x):
-        # if x[0] == '"' and x[-1] == '"':
-            # return x.replace('_', ' ')
+        if x[0] == '"' and x[-1] == '"':
+            return x.replace('_', ' ')
         try:
             # print(1)
             a = int(x)
