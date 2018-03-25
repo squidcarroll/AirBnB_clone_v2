@@ -22,6 +22,7 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = ("(hbnb) ")
 
+    # quiting stuff
     def do_quit(self, args):
         '''
             Quit command to exit the program.
@@ -34,6 +35,29 @@ class HBNBCommand(cmd.Cmd):
         '''
         return True
 
+    # new create
+    def create_parser(self, x):
+        # if x[0] == '"' and x[-1] == '"':
+        #     return x.replace('_', ' ')
+        try:
+            # print(1)
+            a = int(x)
+            # print(2)
+        except ValueError:
+            try:
+                # print(3)
+                b = float(x)
+                # print(4)
+            except ValueError:
+                # print(5)
+                return x.replace('_', ' ')
+            else:
+                # print(6)
+                return b
+        else:
+            # print(7)
+            return a
+
     def do_create(self, args):
         '''
             Create a new instance of class BaseModel and saves it
@@ -44,12 +68,20 @@ class HBNBCommand(cmd.Cmd):
             return
         try:
             args = shlex.split(args)
+            # print(args)
+            grandArr = [arg.split('=') for arg in args[1:-1]]
+
             new_instance = eval(args[0])()
+
+            for minArr in grandArr:
+                setattr(new_instance, minArr[0], self.create_parser(minArr[1]))
+
             new_instance.save()
             print(new_instance.id)
 
         except:
             print("** class doesn't exist **")
+
 
     def do_show(self, args):
         '''
