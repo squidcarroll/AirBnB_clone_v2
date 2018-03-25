@@ -5,6 +5,7 @@
 import cmd
 import json
 import shlex
+import re
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 from models.user import User
@@ -71,15 +72,17 @@ class HBNBCommand(cmd.Cmd):
             instance = args[0]
             # print(args)
             args = [arg for arg in args if '=' in arg]
+            # print(args)
 
             new_instance = eval(instance)()
 
-            for minArr in [arg.split('=') for arg in args[1:-1]]:
+            for minArr in [arg.split('=') for arg in args]:
+                # print(minArr[0], " | ", minArr[1])
                 setattr(new_instance, minArr[0], self.create_parser(minArr[1]))
 
-            # new_instance.save()
-            print(new_instance)
-            # print(new_instance.id)
+            new_instance.save()
+            # print(new_instance)
+            print(new_instance.id)
 
         except:
             print("** class doesn't exist **")
