@@ -58,6 +58,8 @@ class FileStorage:
         '''
             delete obj
         '''
-        if obj in self.__objects:
-            key = str(obj.__class__.__name__) + "." + str(obj.id)
-            del self.__objects[key]
+        if obj is None:
+            return
+        key = str(obj.__class__.__name__) + "." + str(obj.id)
+        del self.__objects[key]
+        self.save()
