@@ -5,8 +5,8 @@
 
 from os import getenv
 
-from models.city import City
-from models import storage
+# from .city import City
+# from models import storage
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
@@ -17,10 +17,10 @@ class State(BaseModel, Base):
         Implementation for the State.
     '''
     __tablename__ = "states"
-    name = Column(String(128), nulable=False)
+    name = Column(String(128), nullable=False)
 
     if getenv('HBNB_TYPE_STORAGE') == 'db':
-        cities = relationship('City', backref='state', cascade='delete')
+        cities = relationship('City', backref='states', cascade='delete')
     else:
         @property
         def cities(self):

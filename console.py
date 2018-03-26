@@ -41,22 +41,15 @@ class HBNBCommand(cmd.Cmd):
         if x[0] == '"' and x[-1] == '"':
             return x.replace('_', ' ')
         try:
-            # print(1)
             a = int(x)
-            # print(2)
         except ValueError:
             try:
-                # print(3)
                 b = float(x)
-                # print(4)
             except ValueError:
-                # print(5)
                 return x.replace('_', ' ')
             else:
-                # print(6)
                 return b
         else:
-            # print(7)
             return a
 
     def do_create(self, args):
@@ -69,20 +62,17 @@ class HBNBCommand(cmd.Cmd):
             return
         try:
             args = shlex.split(args)
-            instance = args[0]
-            # print(args)
+            new_instance = eval(args[0])()
+            print(1)
             args = [arg for arg in args if '=' in arg]
-            # print(args)
-
-            new_instance = eval(instance)()
-
+            print(2)
             for minArr in [arg.split('=') for arg in args]:
-                # print(minArr[0], " | ", minArr[1])
                 setattr(new_instance, minArr[0], self.create_parser(minArr[1]))
-
+            print(3)
             new_instance.save()
-            # print(new_instance)
+            # print(4)
             print(new_instance.id)
+            # print(5)
 
         except:
             print("** class doesn't exist **")

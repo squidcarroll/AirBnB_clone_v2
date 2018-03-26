@@ -35,7 +35,7 @@ class DBStorage:
             getenv("HBNB_MYSQL_PWD"),
             getenv("HBNB_MYSQL_HOST"),
             getenv("HBNB_MYSQL_DB")),
-        pool_pre_ping=True)
+        pool_pre_ping=True, echo=True)
 
         if getenv("HBNB_ENV") == 'test':
             Base.metadata.drop_all(self.__engine)
@@ -51,7 +51,9 @@ class DBStorage:
         self.__session.add(obj)
 
     def save(self):
+        print(12)
         self.__session.commit()
+        print(13)
 
     def delete(self, obj=None):
         if obj is not None:
@@ -61,7 +63,7 @@ class DBStorage:
         Base.metadata.create_all(self.__engine)
         sesh_maker = sessionmaker(
             bind=self.__engine,
-            expire_on_commit=True)
+            expire_on_commit=False)
         Session = scoped_session(sesh_maker)
         self.__session = Session()
 

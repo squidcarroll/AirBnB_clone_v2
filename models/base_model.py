@@ -15,13 +15,13 @@ class BaseModel:
     '''
         Base class for other classes to be used for the duration.
     '''
+    id = Column(String(60), nullable=False, primary_key=True)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
+    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
     def __init__(self, *args, **kwargs):
         '''
             Initialize public instance attributes.
         '''
-        id = Column(String(60), nullable=False, primary_key=True)
-        created_at = Column(DateTime, nulable=False, default=datetime.utcnow())
-        updated_at = Column(DateTime, nulable=False, default=datetime.utcnow())
 
         if (len(kwargs) == 0):
             self.id = str(uuid.uuid4())
@@ -55,8 +55,11 @@ class BaseModel:
             Update the updated_at attribute with new.
         '''
         self.updated_at = datetime.now()
+        print(1)
         models.storage.new(self)
+        print(2)
         models.storage.save()
+        print(3)
 
     def to_dict(self):
         '''
