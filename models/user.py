@@ -2,6 +2,7 @@
 '''
     Implementation of the User class which inherits from BaseModel
 '''
+# from models import Place
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
