@@ -51,6 +51,7 @@ class Place(BaseModel, Base):
             if obj.__class__.__name__ != "Amenity":
                 return
             obj_dict = storage.all(obj)
+            place_id = self.id
             for key, value in obj_dict.items():
                 if value.place_id == self.id:
                     self.amenity_ids.append(value.id)
