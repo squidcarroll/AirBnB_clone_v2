@@ -10,7 +10,8 @@ class User(BaseModel, Base):
     '''
         Definition of the User class
     '''
-    places = relationship('Place', backref='users', cascade='delete')
+    places = relationship('Place', backref='user', cascade='delete')
+    reviews = relationship('Review', backref='user', cascade='delete')
     email = Column(String(128), nullable=False)
     password = Column(String(128), nullable=False)
     first_name = Column(String(128), nullable=True)

@@ -3,6 +3,8 @@
     Define the class Place.
 '''
 from models.base_model import BaseModel, Base
+from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy.orm import relationship
 
 
 class Place(BaseModel, Base):
