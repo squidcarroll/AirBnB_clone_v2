@@ -25,7 +25,6 @@ class DBStorage:
     """
     __engine = None
     __session = None
-    classes = [User, City, State, Place, Review, Amenity]
     
 
     def __init__(self):
@@ -35,25 +34,29 @@ class DBStorage:
             getenv("HBNB_MYSQL_PWD"),
             getenv("HBNB_MYSQL_HOST"),
             getenv("HBNB_MYSQL_DB")),
-        pool_pre_ping=True, echo=True)
+        pool_pre_ping=True, echo=False)
 
         if getenv("HBNB_ENV") == 'test':
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
+        tmp = []
         if cls is None:
-            output = self.__session.query(*self.classes)
+            tmp_all_query = [City, State] # , User,  Place, Review, Amenity
+            output = self.__session.query(*tmp_all_query)
+            for a, b in output:
+                tmp.append(a)
+                tmp.append(b)
         else:
             output = self.__session.query(cls)
-        # do stuff blep
+            tmp = [out for out in output]
+        return(tmp)
 
     def new(self, obj):
         self.__session.add(obj)
 
     def save(self):
-        print(12)
         self.__session.commit()
-        print(13)
 
     def delete(self, obj=None):
         if obj is not None:

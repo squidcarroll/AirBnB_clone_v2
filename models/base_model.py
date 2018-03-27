@@ -55,11 +55,8 @@ class BaseModel:
             Update the updated_at attribute with new.
         '''
         self.updated_at = datetime.now()
-        print(1)
         models.storage.new(self)
-        print(2)
         models.storage.save()
-        print(3)
 
     def to_dict(self):
         '''
