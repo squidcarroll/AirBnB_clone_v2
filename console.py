@@ -6,6 +6,8 @@ import cmd
 import json
 import shlex
 import re
+import sys
+
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -52,6 +54,9 @@ class HBNBCommand(cmd.Cmd):
         else:
             return a
 
+    def str_to_class(str):
+        return eval(str)
+
     def do_create(self, args):
         '''
             Create a new instance of class BaseModel and saves it
@@ -62,19 +67,29 @@ class HBNBCommand(cmd.Cmd):
             return
         try:
             args = shlex.split(args)
+            # print(0)
+            # print(args[0])
+            # new_instance = str_to_class(args[0]).
+            # lol = Review()
+            # print(type(lol))
+            # print('--')
+            # lol = City()
+            # print(type(lol))
             new_instance = eval(args[0])()
-            print(1)
+            # print(type(new_instance))
+            # print(1)
             args = [arg for arg in args if '=' in arg]
-            print(2)
+            # print(2)
             for minArr in [arg.split('=') for arg in args]:
                 setattr(new_instance, minArr[0], self.create_parser(minArr[1]))
-            print(3)
+            # print(3)
             new_instance.save()
             # print(4)
             print(new_instance.id)
             # print(5)
 
-        except:
+        except Exception as e:
+            print(e)
             print("** class doesn't exist **")
 
 
