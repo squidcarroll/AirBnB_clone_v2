@@ -4,24 +4,17 @@
 '''
 # from models.engine import storage
 from models.review import Review
+from models.amenity import Amenity
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey, Integer, Float, Table
 from sqlalchemy.orm import relationship
 from os import getenv
 
 
-class PlaceAmenity(Base):
-    __tablename__ = "place_amenity"
-    place_id = Column(String(60),
-                      ForeignKey("places.id"),
-                      primary_key=True,
-                      nullable=False),
-    amenity_id = Column(String(60),
-                        ForeignKey("amenities.id"),
-                        primary_key=True,
-                        nullable=False)
-    metadata = Base.metadata
-
+association_table = Table('place_amenity', Base.metadata,
+    Column('place_id', String(60), ForeignKey('places.id'), nullable=False),
+    Column('amenity_id', String(60), ForeignKey('amenities.id'), nullable=False)
+)
 
 class Place(BaseModel, Base):
     '''
@@ -42,20 +35,20 @@ class Place(BaseModel, Base):
 
     if getenv('HBNB_TYPE_STORAGE') == 'db':
         reviews = relationship('Review', backref='place', cascade='delete')
-        amenities = relationship('Amenity', secondary="place_amenity", viewonly=False)
+        amenities = relationship('Amenity',
+                                 secondary=association_table,
+                                 viewonly=False)
     else:
         @property
-        def reviews(self):
-            obj_dict = storage.all(Review)
-            for key, value in obj_dict:
-                if value.place_id is not self.id:
-                    del obj_dict[key]
-            return obj_dict
-
-        @property
         def amenities(self):
-            obj_dict = storage.all(Amenity)
-            for key, value in obj_dict:
-                if value.place_id is not self.id:
-                    del obj_dict[key]
-            return obj_dict
+            return self.amenity_ids
+
+        @amenities.setter
+        def amenities(self, obj=None):
+            self.amenity_ids = obj.id
+            if obj.__class__.__name__ == "Amenity":
+                return
+            obj_dict = storage.all(obj)
+            for key, value in obj_dict.items():
+                if value.place_id == self.id:
+                    self.amenity_ids.append(value.id)
