@@ -48,7 +48,7 @@ class Place(BaseModel, Base):
         def amenities(self, obj=None):
             ''' setter for amenity_ids '''
             self.amenity_ids = obj.id
-            if obj.__class__.__name__ == "Amenity":
+            if obj.__class__.__name__ != "Amenity":
                 return
             obj_dict = storage.all(obj)
             for key, value in obj_dict.items():
