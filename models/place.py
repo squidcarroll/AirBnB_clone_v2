@@ -41,10 +41,12 @@ class Place(BaseModel, Base):
     else:
         @property
         def amenities(self):
+            ''' getter for amenity_ids '''
             return self.amenity_ids
 
         @amenities.setter
         def amenities(self, obj=None):
+            ''' setter for amenity_ids '''
             self.amenity_ids = obj.id
             if obj.__class__.__name__ == "Amenity":
                 return
