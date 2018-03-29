@@ -18,7 +18,3 @@ class TestDbStorage(unittest.testCase):
         amenity.save()
         if amenity.id in models.storage.all():
             self.asserTrue(amenity.name, 'water')
-
-    def testUser(self):
-        user = User(email = "test@gmail.com", password="dogsrcool")
-        user.save()
