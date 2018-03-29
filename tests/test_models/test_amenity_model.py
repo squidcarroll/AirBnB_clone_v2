@@ -10,7 +10,6 @@ from models.base_model import BaseModel
 from models.amenity import Amenity
 
 
-@unittest.skipIf(getenv("HBNB_TYPE_STORAGE") == 'db', "wowow")
 
 class TestAmenity(unittest.TestCase):
     '''

@@ -12,7 +12,6 @@ import sys
 import datetime
 
 
-@unittest.skipIf(getenv("HBNB_TYPE_STORAGE") == 'db', "wowow")
 class TestUser(unittest.TestCase):
     '''
         Testing User class

@@ -10,7 +10,6 @@ from models.user import User
 from models.state import State
 
 
-@unittest.skipIf(getenv("HBNB_TYPE_STORAGE") != 'db', "wowow")
 class TestDbStorage(unittest.testCase):
     ''' tests for db storage '''
     def testAmenity(self):

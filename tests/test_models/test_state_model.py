@@ -7,7 +7,6 @@ from models.base_model import BaseModel
 from models.state import State
 
 
-@unittest.skipIf(getenv("HBNB_TYPE_STORAGE") == 'db', "wowow")
 class TestState(unittest.TestCase):
     '''
         Test the State class.

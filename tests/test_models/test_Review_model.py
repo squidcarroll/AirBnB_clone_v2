@@ -9,7 +9,6 @@ from models.base_model import BaseModel
 from models.review import Review
 
 
-@unittest.skipIf(getenv("HBNB_TYPE_STORAGE") == 'db', "wowow")
 class TestReview(unittest.TestCase):
     '''
         Testing Review class
