@@ -11,6 +11,7 @@ import sys
 import datetime
 
 
+@unittest.skipIf(getenv("HBNB_TYPE_STORAGE") == 'db', "wowow")
 class TestBase(unittest.TestCase):
     '''
         Testing the base class model.

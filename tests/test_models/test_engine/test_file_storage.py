@@ -11,6 +11,7 @@ from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
 
+@unittest.skipIf(getenv("HBNB_TYPE_STORAGE") == 'db', "wowow")
 class testFileStorage(unittest.TestCase):
     '''
         Testing the FileStorage class

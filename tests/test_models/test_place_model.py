@@ -9,6 +9,7 @@ from models.base_model import BaseModel
 from models.place import Place
 
 
+@unittest.skipIf(getenv("HBNB_TYPE_STORAGE") == 'db', "wowow")
 class TestUser(unittest.TestCase):
     '''
         Testing Place class
