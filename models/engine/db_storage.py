@@ -1,4 +1,5 @@
-#!/usr/bin/python3
+#
+/usr/bin/python3
 '''
     Define class DB stroage
 '''
@@ -25,7 +26,7 @@ class DBStorage:
     """
     __engine = None
     __session = None
-    
+
 
     def __init__(self):
         self.__engine = create_engine(
@@ -69,8 +70,3 @@ class DBStorage:
             expire_on_commit=False)
         Session = scoped_session(sesh_maker)
         self.__session = Session()
-
-
-
-        
-

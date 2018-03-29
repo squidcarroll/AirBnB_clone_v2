@@ -4,9 +4,11 @@
     All the test for the amenity model are implemented here.
 '''
 
+from os import getenv
 import unittest
 from models.base_model import BaseModel
 from models.amenity import Amenity
+
 
 
 class TestAmenity(unittest.TestCase):
