@@ -10,4 +10,5 @@ def deploy():
     file_path = do_pack.do_pack()
     if not file_path:
         return False
-    return do_deploy.do_deploy(file_path)
+    else:
+        return False
