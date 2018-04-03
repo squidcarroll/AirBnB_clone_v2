@@ -6,6 +6,7 @@ import os
 
 env.hosts = ['34.228.66.63', '54.166.228.243']
 
+
 def do_deploy(archive_path):
     ''' script that deploys package '''
     if not os.path.exists(archive_path):
