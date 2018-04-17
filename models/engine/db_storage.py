@@ -1,5 +1,4 @@
-#
-/usr/bin/python3
+#!/usr/bin/python3
 '''
     Define class DB stroage
 '''
@@ -70,3 +69,6 @@ class DBStorage:
             expire_on_commit=False)
         Session = scoped_session(sesh_maker)
         self.__session = Session()
+
+    def close(self):
+        self.__session.remove()
