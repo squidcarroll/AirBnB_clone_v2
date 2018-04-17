@@ -67,8 +67,7 @@ class DBStorage:
         sesh_maker = sessionmaker(
             bind=self.__engine,
             expire_on_commit=False)
-        Session = scoped_session(sesh_maker)
-        self.__session = Session()
+        self.__session = scoped_session(sesh_maker)
 
     def close(self):
         self.__session.remove()
