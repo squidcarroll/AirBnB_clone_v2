@@ -8,6 +8,7 @@ app = Flask(__name__)
 
 @app.route('/cities_by_states', strict_slashes=False)
 def list_states_and_cities():
+    ''' list states '''
     return render_template(
         '8-cities_by_states.html',
         st=storage.all(State),
@@ -17,6 +18,7 @@ def list_states_and_cities():
 
 @app.teardown_appcontext
 def tear_down(exceptions):
+    '''tear down'''
     storage.close()
 
 if __name__ == "__main__":
