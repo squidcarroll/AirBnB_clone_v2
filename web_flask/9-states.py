@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/states', strict_slashes=False)
 @app.route('/states/<state_id>', strict_slashes=False)
-def list_states(state_id=None):
+def listStates(state_id=None):
     if state_id is None:
         states = storage.all(State)
         cities = None
@@ -20,7 +20,7 @@ def list_states(state_id=None):
             states = None
             cities = None
         else:
-            cities = [o for o in storage.all(City) if o.state_id == state_id]
+            cities = [obj for obj in storage.all(City) if obj.state_id == state_id]
 
     return render_template('9-states.html', states=states, cities=cities)
 
