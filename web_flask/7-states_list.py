@@ -1,4 +1,4 @@
-#!/usr/python3
+#!/usr/bin/python3
 ''' list states '''
 
 from flask import Flask, render_template
@@ -8,6 +8,7 @@ app = Flask(__name__)
 
 @app.route('/states_list', strict_slashes=False)
 def listStates():
+    ''' list states '''
     return render_template('7-states_list.html', st=storage.all(State))
 
 

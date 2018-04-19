@@ -1,4 +1,4 @@
-#!/usr/bin/pyton3
+#!/usr/bin/python3
 '''list cities by states'''
 
 from flask import Flask, render_template
