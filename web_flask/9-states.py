@@ -20,7 +20,8 @@ def listStates(state_id=None):
             states = None
             cities = None
         else:
-            cities = [obj for obj in storage.all(City) if obj.state_id == state_id]
+            cities = [obj for obj in storage.all(City)
+                      if obj.state_id == state_id]
 
     return render_template('9-states.html', states=states, cities=cities)
 
